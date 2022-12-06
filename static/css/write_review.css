@@ -224,66 +224,11 @@ text-align: left;
 
 }
 
-.bf1{
-  display: inline-block;
-
-  padding:0px;
-
-  font-size: 24px;
-
-  font-family: 'Inter';
-  cursor: pointer;
-
-  text-align: center;
-
-  text-decoration: none;
-
-  outline: none;
-
-  color: #fff;
-
-  background-color:#CEC4BC;
-
-  border: none;
-
-
-}
-.b1 :hover{
-  background-color: #fff;
-}
-
-.b1:active {
-
-  color:#fff;
-
-
-}
-
-.clicked{
-  color:#403831;
-}
-
-.b1{
-position: absolute;
-
-width: 30px;
-height:35px;
-margin:0px;
-font-family: 'Inter';
-font-style: normal;
-font-weight: 0;
-font-size: 25px;
-line-height: 36px;
-display: flex;
-align-items: center;
-text-align: center;
-border: none;
-color: #403831;
-background-color:#CEC4BC;
 
 
 
-}
+
+
 #myform fieldset{
   display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
   direction: rtl; /* 이모지 순서 반전 */
@@ -317,14 +262,14 @@ background-color:#CEC4BC;
     }
   }
   /*@media screen and (max-width: 1120px) {
-    tabfle {
+    table {
       width: 220px;
     }
 
   }
 
   @media screen and (min-width: 1360px) {
-    tablfe {
+    table {
       width: 243px;
     }
       .number h1{
