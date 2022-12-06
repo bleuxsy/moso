@@ -39,20 +39,21 @@
                     <h1 style="top:12%;">2. 평점 등록</h1>
                     <div class="img" ><img src="{{url_for('static', filename='image/Thumbs-up.png')}}"style="top:3px;width:35px; height:35px;"></div>
 
-                    <div class="bb" style="position:absolute; left:-60px;top:20%;">
-                        
-                        <form name="myform" id="myform" method="post" action="./save" >
+                    <div class="bb" style="position:absolute; left:-60px;top:20.8%;">
+                    
+                        <div name="myform" id="myform" method="post" action="./save" >
                             <fieldset>
                                 
-                                <input type="radio" name="rating" value="5" id="rate1" style="position:absolute;left:-10px;"><label for="rate1">⭐</label>
-                                <input type="radio" name="rating" value="4" id="rate2"style="position:absolute;left:20px;"><label for="rate2">⭐</label>
+                                <input type="radio" name="rating" value="5" id="rate1" style="position:absolute;left:-10px;"><label for="rate1">★</label>
+                                <input type="radio" name="rating" value="4" id="rate2"style="position:absolute;left:20px;"><label for="rate2">★</label>
                                 <input type="radio" name="rating" value="3" id="rate3"style="position:absolute;left:50px;"><label for="rate3">⭐</label>
                                 <input type="radio" name="rating" value="2" id="rate4"style="position:absolute;left:80px;"><label for="rate4">⭐</label>
                                 <input type="radio" name="rating" value="1" id="rate5"style="position:absolute;left:110px;"><label for="rate5">⭐</label>
                             </fieldset>
-                        </form>
+                        </div>
                          
-                    </div>
+                    </div>    
+                    
                 </td>
             </tr>
             <tr>
