@@ -41,3 +41,29 @@ var b1 = document.getElementsByClassName("b1");
         document.body.style.backgroundColor = "white";
       }
 
+    function go(){
+        var review = document.getElementById("review");
+        var year = document.getElementById("year");
+        var month = document.getElementById("month");
+        var date = document.getElementById("date");
+        var name = document.getElementById("restaurant_name");
+        if(name.value==""){
+          alert("식당 이름을 입력해주세요!")
+        }
+        else if(year.value==""){
+          alert("날짜를 입력해주세요!")
+        }
+        else if(month.value==""){
+          alert("날짜를 입력해주세요!")
+        }
+        else if(date.value==""){
+          alert("날짜를 입력해주세요!")
+        }
+        else if(review.value==""){
+          alert("리뷰를 작성해주세요!")
+        }
+        else{
+          location.href="view_review.html"
+        }
+      }
+

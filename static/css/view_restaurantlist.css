@@ -47,7 +47,7 @@ a{
 
   .card3 h2{
     position:absolute;
-    width: 238px;
+    width: 1000px;
     height: 63px;
     margin-left: 110;
     top: 3px;
@@ -118,14 +118,14 @@ a{
   font-size: 10px;
   text-align: center;
 }
-  .rectangle {
+.rectangle {
     box-sizing: border-box;
     box-align:center;
     margin:0;
     position: absolute;
     width: 230px;
     height:270px;
-    top: 92px;
+    top: 200px;
     border: 1px solid #000000;
   }
 
@@ -410,3 +410,35 @@ a{
       .sidenav {padding-top: 15px;}
       .sidenav a {font-size: 14px;}
     }
+
+.page-nation li{
+    list-style: none;
+}
+
+.page-wrap{
+    text-align: center;
+    font-size: 0;
+}
+
+.page-nation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.page-nation a{
+    display: block;
+    margin: 0 3px;
+    float: left;
+    border: 1px solid #e6e6e6;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background-color: #fff;
+    font-size: 13px;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}

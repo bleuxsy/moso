@@ -1,7 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from database import DBhandler
 import sys
+import hashlib
+import os
 application = Flask(__name__)
+application.secret_key = os.urandom(24)
 DB = DBhandler()
 
 @application.route("/")
@@ -14,9 +17,41 @@ def index():
 def login():
     return render_template("login.html")
 
+@application.route("/login_confirm", methods=['POST'])
+def login_user():
+    id_=request.form['id']
+    pw=request.form['password']
+    pw_hash=hashlib.sha256(pw.encode('utf-8')).hexdigest()
+    if DB.find_user(id_, pw_hash):
+        session['id']=id_
+#        data = DB.get_restaurant_byname(str(id_))
+#        print("####data:",data)
+#        return render_template('index.html', data=data)
+        return redirect(url_for('index'))
+    else: 
+        flash('Wrond ID or PW!')
+        return render_template('login.html')
+    
+@application.route("/logout")
+def logout_user():
+    session.clear()
+    return redirect(url_for('index'))
+
 @application.route("/signup")
 def signup():
     return render_template("signup.html")
+
+#회원가입
+@application.route("/signup_post", methods=['POST'])
+def register_user():
+    data=request.form
+    pw=request.form['password']
+    pw_hash=hashlib.sha256(pw.encode('utf-8')).hexdigest()
+    if DB.insert_user(data, pw_hash):
+        return render_template('login.html')
+    else:
+        flash('user id already exist!')
+        return render_template('signup.html')
 
 @application.route("/register_restaurant")
 def register_restaurant():
@@ -64,28 +99,28 @@ def view_one_restaurant():
 #    return render_template("food_list.html", datas=data.items(), total=int(tot_count),
 #                               limit=limit, page=page, page_count=int((tot_count/3)+1)) 
 
-@application.route("/food_list/<name>/")
-def view_foods(name):
+@application.route("/view_mainmenulist/<name>/")
+def view_mainmenulist(name):
     data = DB.get_food_byname(str(name))
     tot_count=len(data)
     
-    return render_template("food_list.html", datas=data, total=tot_count)
+    return render_template("view_mainmenulist.html", datas=data, total=tot_count)
 
-@application.route("/review_list/<name>/")
-def view_reviews(name):
+@application.route("/view_reviewlist/<name>/")
+def view_reviewlist(name):
     data = DB.get_review_byname(str(name))
     tot_count=len(data)
     
-    return render_template("review_list.html", datas=data, total=tot_count)
+    return render_template("view_reviewlist.html", datas=data, total=tot_count)
 
     
-@application.route("/view_mainmenu", methods=['GET','POST'])    
-def view_mainmenu():
+@application.route("/result_mainmenu", methods=['GET','POST'])    
+def result_mainmenu():
     image_file=request.files["file"]
     image_file.save("static/image/{}".format(image_file.filename))
     data=request.form
     if DB.insert_mainmenu(data['menu_name'], data, image_file.filename):
-        return render_template("view_mainmenu.html",data=data,image_file=image_file.filename)
+        return render_template("result_mainmenu.html",data=data,image_file=image_file.filename)
     else:
         return "Mainmenu name is already exist!"
     
@@ -93,13 +128,13 @@ def view_mainmenu():
 def write_review():
     return render_template("write_review.html")
 
-@application.route("/view_review", methods=['GET','POST'])
-def view_review():
+@application.route("/result_review", methods=['GET','POST'])
+def result_review():
     # image_file=request.files["file"]
     # image_file.save("static/image/{}".format(image_file.filename))
     data=request.form    
     if DB.insert_review(data['write'],data):
-        return render_template("view_review.html",data=data)
+        return render_template("result_review.html",data=data)
     else:
         return "YOUR REVIEW ALREADY EXISTS!"
 
@@ -134,3 +169,5 @@ def view_restaurant_detail(name):
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0', debug = True)
+    application.secret_key = 'super secret key'
+    application.config['SESSION_TYPE'] = 'filesystem'
